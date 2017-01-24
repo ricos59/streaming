@@ -33,6 +33,12 @@ class Episode
      * @ORM\JoinColumn(name="saison_id")
      */
     private $saisonAssocie;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Saison", inversedBy="episodes")
+     * @ORM\JoinColumn(name="episode_id")
+     */
+    private $episodeAssocie;
 
     /**
      * @var int
@@ -122,5 +128,29 @@ class Episode
     public function getSaisonAssocie()
     {
         return $this->saisonAssocie;
+    }
+
+    /**
+     * Set episodeAssocie
+     *
+     * @param \AppBundle\Entity\Saison $episodeAssocie
+     *
+     * @return Episode
+     */
+    public function setEpisodeAssocie(\AppBundle\Entity\Saison $episodeAssocie = null)
+    {
+        $this->episodeAssocie = $episodeAssocie;
+
+        return $this;
+    }
+
+    /**
+     * Get episodeAssocie
+     *
+     * @return \AppBundle\Entity\Saison
+     */
+    public function getEpisodeAssocie()
+    {
+        return $this->episodeAssocie;
     }
 }

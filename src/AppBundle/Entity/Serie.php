@@ -43,25 +43,25 @@ class Serie {
     private $nbSaisons;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Lien")
+     * @ORM\ManyToOne(targetEntity="Lien", inversedBy="series")
      * @ORM\JoinColumn(name="lien_id")
      */
     private $lienAssocie;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Saison")
+     * @ORM\ManyToOne(targetEntity="Saison", inversedBy="series")
      * @ORM\JoinColumn(name="saison_id")
      */
     private $saisonAssocie;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Genre")
+     * @ORM\ManyToOne(targetEntity="Genre", inversedBy="series")
      * @ORM\JoinColumn(name="genre_id")
      */
     private $genreAssocie;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\ManyToOne(targetEntity="Pays", inversedBy="series")
      * @ORM\JoinColumn(name="pays_id")
      */
     private $paysAssocie;

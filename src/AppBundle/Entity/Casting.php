@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="casting")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CastingRepository")
  */
-class Casting
-{
+class Casting {
+
     /**
      * @var int
      *
@@ -20,6 +20,11 @@ class Casting
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManytoMany(targetEntity="Film", mappedBy="realisateurs")
+     */
+    private $filmsRealises;
 
     /**
      * @var string
@@ -35,14 +40,12 @@ class Casting
      */
     private $prenom;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -53,8 +56,7 @@ class Casting
      *
      * @return Casting
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -65,8 +67,7 @@ class Casting
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
@@ -77,8 +78,7 @@ class Casting
      *
      * @return Casting
      */
-    public function setPrenom($prenom)
-    {
+    public function setPrenom($prenom) {
         $this->prenom = $prenom;
 
         return $this;
@@ -89,8 +89,49 @@ class Casting
      *
      * @return string
      */
-    public function getPrenom()
-    {
+    public function getPrenom() {
         return $this->prenom;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->filmsRealises = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add filmsRealise
+     *
+     * @param \AppBundle\Entity\Film $filmsRealise
+     *
+     * @return Casting
+     */
+    public function addFilmsRealise(\AppBundle\Entity\Film $filmsRealise)
+    {
+        $this->filmsRealises[] = $filmsRealise;
+
+        return $this;
+    }
+
+    /**
+     * Remove filmsRealise
+     *
+     * @param \AppBundle\Entity\Film $filmsRealise
+     */
+    public function removeFilmsRealise(\AppBundle\Entity\Film $filmsRealise)
+    {
+        $this->filmsRealises->removeElement($filmsRealise);
+    }
+
+    /**
+     * Get filmsRealises
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFilmsRealises()
+    {
+        return $this->filmsRealises;
     }
 }
