@@ -27,6 +27,12 @@ class Episode
      * @ORM\Column(name="numero_episode", type="integer")
      */
     private $numeroEpisode;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Saison")
+     * @ORM\JoinColumn(name="saison_id")
+     */
+    private $saisonAssocie;
 
     /**
      * @var int
@@ -93,5 +99,28 @@ class Episode
     {
         return $this->duree;
     }
-}
 
+    /**
+     * Set saisonAssocie
+     *
+     * @param \AppBundle\Entity\Saison $saisonAssocie
+     *
+     * @return Episode
+     */
+    public function setSaisonAssocie(\AppBundle\Entity\Saison $saisonAssocie = null)
+    {
+        $this->saisonAssocie = $saisonAssocie;
+
+        return $this;
+    }
+
+    /**
+     * Get saisonAssocie
+     *
+     * @return \AppBundle\Entity\Saison
+     */
+    public function getSaisonAssocie()
+    {
+        return $this->saisonAssocie;
+    }
+}

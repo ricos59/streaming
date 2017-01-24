@@ -34,6 +34,16 @@ class Saison
      * @ORM\Column(name="nombre_episode", type="integer", length=255)
      */
     private $nombreEpisode;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Serie", mappedBy="saisonAssocie")
+     */
+    private $series;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Episode", mappedBy="episodeAssocie")
+     */
+    private $episodes;
 
 
     /**
@@ -93,5 +103,79 @@ class Saison
     {
         return $this->nombreEpisode;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->series = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add series
+     *
+     * @param \AppBundle\Entity\Serie $series
+     *
+     * @return Saison
+     */
+    public function addSeries(\AppBundle\Entity\Serie $series)
+    {
+        $this->series[] = $series;
+
+        return $this;
+    }
+
+    /**
+     * Remove series
+     *
+     * @param \AppBundle\Entity\Serie $series
+     */
+    public function removeSeries(\AppBundle\Entity\Serie $series)
+    {
+        $this->series->removeElement($series);
+    }
+
+    /**
+     * Get series
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSeries()
+    {
+        return $this->series;
+    }
+
+    /**
+     * Add episode
+     *
+     * @param \AppBundle\Entity\Episode $episode
+     *
+     * @return Saison
+     */
+    public function addEpisode(\AppBundle\Entity\Episode $episode)
+    {
+        $this->episodes[] = $episode;
+
+        return $this;
+    }
+
+    /**
+     * Remove episode
+     *
+     * @param \AppBundle\Entity\Episode $episode
+     */
+    public function removeEpisode(\AppBundle\Entity\Episode $episode)
+    {
+        $this->episodes->removeElement($episode);
+    }
+
+    /**
+     * Get episodes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEpisodes()
+    {
+        return $this->episodes;
+    }
+}

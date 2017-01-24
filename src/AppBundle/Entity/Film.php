@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="film")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FilmRepository")
  */
-class Film
-{
+class Film {
+
     /**
      * @var int
      *
@@ -22,8 +22,26 @@ class Film
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Genre")
+     * @ORM\JoinColumn(name="genre_id")
+     */
+    private $genreAssocie;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\JoinColumn(name="pays_id")
+     */
+    private $paysAssocie;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Lien")
+     * @ORM\JoinColumn(name="lien_id")
+     */
+    private $lienAssocie;
+
+    /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
@@ -49,14 +67,12 @@ class Film
      */
     private $anneeProd;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -67,8 +83,7 @@ class Film
      *
      * @return Film
      */
-    public function setTitre($titre)
-    {
+    public function setTitre($titre) {
         $this->titre = $titre;
 
         return $this;
@@ -79,8 +94,7 @@ class Film
      *
      * @return string
      */
-    public function getTitre()
-    {
+    public function getTitre() {
         return $this->titre;
     }
 
@@ -91,8 +105,7 @@ class Film
      *
      * @return Film
      */
-    public function setSynopsis($synopsis)
-    {
+    public function setSynopsis($synopsis) {
         $this->synopsis = $synopsis;
 
         return $this;
@@ -103,8 +116,7 @@ class Film
      *
      * @return string
      */
-    public function getSynopsis()
-    {
+    public function getSynopsis() {
         return $this->synopsis;
     }
 
@@ -115,8 +127,7 @@ class Film
      *
      * @return Film
      */
-    public function setDuree($duree)
-    {
+    public function setDuree($duree) {
         $this->duree = $duree;
 
         return $this;
@@ -127,8 +138,7 @@ class Film
      *
      * @return int
      */
-    public function getDuree()
-    {
+    public function getDuree() {
         return $this->duree;
     }
 
@@ -139,8 +149,7 @@ class Film
      *
      * @return Film
      */
-    public function setAnneeProd($anneeProd)
-    {
+    public function setAnneeProd($anneeProd) {
         $this->anneeProd = $anneeProd;
 
         return $this;
@@ -151,9 +160,78 @@ class Film
      *
      * @return int
      */
-    public function getAnneeProd()
-    {
+    public function getAnneeProd() {
         return $this->anneeProd;
     }
-}
 
+    /**
+     * Set genreAssocie
+     *
+     * @param \AppBundle\Entity\Genre $genreAssocie
+     *
+     * @return Film
+     */
+    public function setGenreAssocie(\AppBundle\Entity\Genre $genreAssocie = null) {
+        $this->genreAssocie = $genreAssocie;
+
+        return $this;
+    }
+
+    /**
+     * Get genreAssocie
+     *
+     * @return \AppBundle\Entity\Genre
+     */
+    public function getGenreAssocie() {
+        return $this->genreAssocie;
+    }
+
+
+    /**
+     * Set paysAssocie
+     *
+     * @param \AppBundle\Entity\Pays $paysAssocie
+     *
+     * @return Film
+     */
+    public function setPaysAssocie(\AppBundle\Entity\Pays $paysAssocie = null)
+    {
+        $this->paysAssocie = $paysAssocie;
+
+        return $this;
+    }
+
+    /**
+     * Get paysAssocie
+     *
+     * @return \AppBundle\Entity\Pays
+     */
+    public function getPaysAssocie()
+    {
+        return $this->paysAssocie;
+    }
+
+    /**
+     * Set lienAssocie
+     *
+     * @param \AppBundle\Entity\Lien $lienAssocie
+     *
+     * @return Film
+     */
+    public function setLienAssocie(\AppBundle\Entity\Lien $lienAssocie = null)
+    {
+        $this->lienAssocie = $lienAssocie;
+
+        return $this;
+    }
+
+    /**
+     * Get lienAssocie
+     *
+     * @return \AppBundle\Entity\Lien
+     */
+    public function getLienAssocie()
+    {
+        return $this->lienAssocie;
+    }
+}
